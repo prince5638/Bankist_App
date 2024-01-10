@@ -61,8 +61,8 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// displaying movements of the user accounts
 const displayMovements = function (movements) {
-
   // emptying dummy movements
   containerMovements.innerHTML = '';
 
@@ -83,8 +83,31 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-
 displayMovements(account1.movements);
+
+// Calculating total balance
+const calcDisplayBalance = function(movements)
+{
+  const balance = movements.reduce((accu, mov)=> accu + mov);
+  labelBalance.textContent = `${balance}€`;
+}
+calcDisplayBalance(account1.movements);
+
+
+// Account username creation method
+const createUsernames = function(accs)
+{
+  accs.forEach((acc)=>{
+    acc.username = acc.owner.
+    toLowerCase().
+    split(' ')
+    .map(name=>name[0])
+    .join('');
+  })
+}
+createUsernames(accounts);
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -96,5 +119,3 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-/////////////////////////////////////////////////
